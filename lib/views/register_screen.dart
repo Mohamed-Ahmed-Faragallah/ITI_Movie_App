@@ -32,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center, // تم التعديل لتوسيط العناصر بشكل صحيح
+                crossAxisAlignment: CrossAxisAlignment.center, 
                 children: [
                   const Icon(
                     Icons.person_add_rounded,
@@ -137,12 +137,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         return const Center(child: CircularProgressIndicator());
                       }
                       return Container(
-                        width: 200, // نفس عرض زر اللوج إن الصغير
+                        width: 200, 
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color.fromARGB(255, 48, 103, 148), // تأثير الإضاءة (التوهج)
+                              color: const Color.fromARGB(255, 48, 103, 148), 
                               offset: const Offset(0, 6),
                               blurRadius: 8,
                             ),
