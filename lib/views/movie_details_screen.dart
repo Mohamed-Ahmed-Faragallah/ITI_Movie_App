@@ -97,10 +97,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                           const SizedBox(width: 16),
                           const Icon(Icons.calendar_today, size: 18 ,  color: Colors.white),
                           const SizedBox(width: 4),
-                          Text(
-                            movie.releaseDate != null
-Text('${movie.releasedDate.year}-${movie.releasedDate.month}-${movie.releasedDate.day}')                                : 'N/A',
-                          ),
+                        Text(
+  movie.releaseDate != null
+      ? '${movie.releaseDate!.year}-${movie.releaseDate!.month}-${movie.releaseDate!.day}'
+      : 'N/A',
+),
                         ],
                       ),
                       const SizedBox(height: 16),
