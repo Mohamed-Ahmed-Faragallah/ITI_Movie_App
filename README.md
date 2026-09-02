@@ -1,17 +1,32 @@
-# iti_movie_app
+ITI Movie App
 
-A new Flutter project.
+A simple Flutter movie app made as my ITI graduation project. It shows trending movies from TMDB
 
-## Getting Started
+Features
+Login and Register with Firebase
+Browse trending movies (TMDB API)
+Movie details (overview, rating, genres,date)
+Add movies to Favourites / Watched / Watching / Want to Watch
+Data is saved locally with SQFLite
 
-This project is a starting point for a Flutter application.
+Built with
+Flutter
+Firebase Auth
+SQFLite
+Provider
+controller
+TMDB API
 
-A few resources to get you started if this is your first Flutter project:
+Project structure
+lib/
+├── controllers/
+├── database/
+├── models/
+├── providers/
+├── services/
+├── views/
+├── widgets/
+└── main.dart
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Needs internet connection to load movies.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
