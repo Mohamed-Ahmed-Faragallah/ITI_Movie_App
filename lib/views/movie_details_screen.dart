@@ -35,10 +35,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   }
 
   Future<void> _checkUserLists() async {
-    final watched = await DatabaseHelper.instance.isMovieInList(widget.movie.id, 'WATCHED');
-    final watching = await DatabaseHelper.instance.isMovieInList(widget.movie.id, 'WATCHING');
-    final wantToWatch = await DatabaseHelper.instance.isMovieInList(widget.movie.id, 'WANT_TO_WATCH');
-    
+    final watched = await DatabaseHelper.instance.isMovieInList(
+      widget.movie.id,
+      'WATCHED',
+    );
+    final watching = await DatabaseHelper.instance.isMovieInList(
+      widget.movie.id,
+      'WATCHING',
+    );
+    final wantToWatch = await DatabaseHelper.instance.isMovieInList(
+      widget.movie.id,
+      'WANT_TO_WATCH',
+    );
+
     if (!mounted) return;
     setState(() {
       isWatched = watched;
@@ -95,13 +104,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                           const SizedBox(width: 4),
                           Text('${movie.voteAverage}'),
                           const SizedBox(width: 16),
-                          const Icon(Icons.calendar_today, size: 18 ,  color: Colors.white),
+                          const Icon(
+                            Icons.calendar_today,
+                            size: 18,
+                            color: Colors.white,
+                          ),
                           const SizedBox(width: 4),
-                        Text(
-  movie.releaseDate != null
-      ? '${movie.releaseDate!.year}-${movie.releaseDate!.month}-${movie.releaseDate!.day}'
-      : 'N/A',
-),
+                          Text(
+                            movie.releaseDate != null
+                                ? '${movie.releaseDate!.year}-${movie.releaseDate!.month}-${movie.releaseDate!.day}'
+                                : 'N/A',
+                          ),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -114,12 +127,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
-                          children: genres.map((g) => Chip(label: Text(g))).toList(),
+                          children: genres
+                              .map((g) => Chip(label: Text(g)))
+                              .toList(),
                         ),
                       const SizedBox(height: 24),
                       const Text(
                         'Overview',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -149,10 +167,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                               fit: BoxFit.contain,
                               width: double.infinity,
                               height: double.infinity,
-                              errorBuilder: (context, error, stackTrace) => Container(
-                                color: Colors.grey[300],
-                                child: const Icon(Icons.movie, size: 80),
-                              ),
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Container(
+                                    color: Colors.grey[300],
+                                    child: const Icon(Icons.movie, size: 80),
+                                  ),
                             ),
                           ),
                         ),
@@ -166,7 +185,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                 backgroundColor: Colors.white70,
                                 child: IconButton(
                                   icon: Icon(
-                                    isFav ? Icons.favorite : Icons.favorite_border,
+                                    isFav
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
                                     color: Colors.red,
                                   ),
                                   onPressed: () {
@@ -205,15 +226,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               children: [
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isWatched ? Colors.green : Colors.grey[200],
+                    backgroundColor: isWatched
+                        ? Colors.green
+                        : Colors.grey[200],
                     foregroundColor: isWatched ? Colors.white : Colors.black,
                   ),
                   onPressed: () async {
                     if (isWatched) {
-                      await DatabaseHelper.instance.removeMovieFromList(movie.id, 'WATCHED');
+                      await DatabaseHelper.instance.removeMovieFromList(
+                        movie.id,
+                        'WATCHED',
+                      );
                       setState(() => isWatched = false);
                     } else {
-                      await DatabaseHelper.instance.addMovieToList(movie.toJson(), 'WATCHED');
+                      await DatabaseHelper.instance.addMovieToList(
+                        movie.toJson(),
+                        'WATCHED',
+                      );
                       setState(() => isWatched = true);
                     }
                   },
@@ -222,36 +251,58 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 ),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isWatching ? Colors.orange : Colors.grey[200],
+                    backgroundColor: isWatching
+                        ? Colors.orange
+                        : Colors.grey[200],
                     foregroundColor: isWatching ? Colors.white : Colors.black,
                   ),
                   onPressed: () async {
                     if (isWatching) {
-                      await DatabaseHelper.instance.removeMovieFromList(movie.id, 'WATCHING');
+                      await DatabaseHelper.instance.removeMovieFromList(
+                        movie.id,
+                        'WATCHING',
+                      );
                       setState(() => isWatching = false);
                     } else {
-                      await DatabaseHelper.instance.addMovieToList(movie.toJson(), 'WATCHING');
+                      await DatabaseHelper.instance.addMovieToList(
+                        movie.toJson(),
+                        'WATCHING',
+                      );
                       setState(() => isWatching = true);
                     }
                   },
-                  icon: Icon(isWatching ? Icons.hourglass_full : Icons.play_arrow),
+                  icon: Icon(
+                    isWatching ? Icons.hourglass_full : Icons.play_arrow,
+                  ),
                   label: const Text('Watching'),
                 ),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isWantToWatch ? Colors.blue : Colors.grey[200],
-                    foregroundColor: isWantToWatch ? Colors.white : Colors.black,
+                    backgroundColor: isWantToWatch
+                        ? Colors.blue
+                        : Colors.grey[200],
+                    foregroundColor: isWantToWatch
+                        ? Colors.white
+                        : Colors.black,
                   ),
                   onPressed: () async {
                     if (isWantToWatch) {
-                      await DatabaseHelper.instance.removeMovieFromList(movie.id, 'WANT_TO_WATCH');
+                      await DatabaseHelper.instance.removeMovieFromList(
+                        movie.id,
+                        'WANT_TO_WATCH',
+                      );
                       setState(() => isWantToWatch = false);
                     } else {
-                      await DatabaseHelper.instance.addMovieToList(movie.toJson(), 'WANT_TO_WATCH');
+                      await DatabaseHelper.instance.addMovieToList(
+                        movie.toJson(),
+                        'WANT_TO_WATCH',
+                      );
                       setState(() => isWantToWatch = true);
                     }
                   },
-                  icon: Icon(isWantToWatch ? Icons.bookmark : Icons.bookmark_border),
+                  icon: Icon(
+                    isWantToWatch ? Icons.bookmark : Icons.bookmark_border,
+                  ),
                   label: const Text('Want to Watch'),
                 ),
               ],
