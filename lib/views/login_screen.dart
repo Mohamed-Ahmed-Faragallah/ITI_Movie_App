@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF020617),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -41,31 +41,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         TextSpan(
                           text: 'ITI\n',
-                          style: TextStyle(color: Colors.red),
+                          style: TextStyle(color: Colors.blueAccent),
                         ),
                         TextSpan(
-                          text: "   I",
-                          style: TextStyle(color: Colors.red),
+                          text: '   I',
+                          style: TextStyle(color: Colors.blueAccent),
                         ),
                         TextSpan(
                           text: "t's ",
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: Colors.white), 
                         ),
                         TextSpan(
                           text: 'T',
-                          style: TextStyle(color: Colors.red),
+                          style: TextStyle(color: Colors.blueAccent),
                         ),
                         TextSpan(
                           text: 'ime to ',
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: Colors.white), 
                         ),
                         TextSpan(
                           text: 'I',
-                          style: TextStyle(color: Colors.red),
+                          style: TextStyle(color: Colors.blueAccent),
                         ),
                         TextSpan(
                           text: 'mmerse',
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: Colors.white), 
                         ),
                       ],
                     ),
@@ -81,15 +81,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: TextField(
                       controller: emailController,
+                      style: const TextStyle(color: Colors.white), 
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        prefixIcon: const Icon(Icons.email_outlined),
+                        labelStyle: const TextStyle(color: Colors.white70),
+                        prefixIcon: const Icon(Icons.email_outlined, color: Colors.white),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Colors.grey),
+                          borderSide: const BorderSide(color: Colors.white54),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(color: Colors.blue),
                         ),
                       ),
                     ),
@@ -100,14 +106,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextField(
                       controller: passwordController,
                       obscureText: _obscureText,
+                      style: const TextStyle(color: Colors.white), 
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        prefixIcon: const Icon(Icons.lock_outline),
+                        labelStyle: const TextStyle(color: Colors.white70),
+                        prefixIcon: const Icon(Icons.lock_outline, color: Colors.white), 
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscureText
                                 ? Icons.visibility
                                 : Icons.visibility_off,
+                            color: Colors.white, 
                           ),
                           onPressed: () {
                             setState(() {
@@ -120,7 +129,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Colors.grey),
+                          borderSide: const BorderSide(color: Colors.white54),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(color: Colors.blue),
                         ),
                       ),
                     ),
