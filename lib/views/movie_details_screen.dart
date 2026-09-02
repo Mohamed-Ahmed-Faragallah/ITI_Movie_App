@@ -77,7 +77,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     final movie = widget.movie;
 
     return Scaffold(
-      appBar: AppBar(title: Text(movie.title), backgroundColor: Colors.grey),
+      appBar: AppBar(title: Text(movie.title), backgroundColor: Color(0xFF020617)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
