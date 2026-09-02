@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/movie_provider.dart';
+import 'movie_details_screen.dart';
+import 'search_screen.dart';
+import 'profile_screen.dart';
+import '../widgets/loading_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,18 +18,41 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MovieProvider>().getMovies();
+      Provider.of<MovieProvider>(context, listen: false).getMovies();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Popular Movies')),
+      appBar: AppBar(
+        title: const Text('Trending Movies'),
+        automaticallyImplyLeading: false, 
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: Consumer<MovieProvider>(
         builder: (context, movieProvider, child) {
           if (movieProvider.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingWidget();
           }
 
           if (movieProvider.error != null) {
@@ -38,18 +64,79 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return ListView.builder(
+            padding: const EdgeInsets.all(10),
             itemCount: movieProvider.movies.length,
             itemBuilder: (context, index) {
               final movie = movieProvider.movies[index];
-              return ListTile(
-                leading: Image.network(
-                  'https://image.tmdb.org/t/p/w200${movie.posterPath}',
-                  width: 50,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.movie),
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                title: Text(movie.title),
-                subtitle: Text('⭐ ${movie.voteAverage}'),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MovieDetailsScreen(movie: movie),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        movie.posterPath.isNotEmpty
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  'https://image.tmdb.org/t/p/w400${movie.posterPath}',
+                                  width: 85,
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const SizedBox(width: 85, height: 120, child: Icon(Icons.movie, size: 40)),
+                                ),
+                              )
+                            : const SizedBox(width: 85, height: 120, child: Icon(Icons.movie, size: 40)),
+                        const SizedBox(width: 15),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                movie.title,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  const Icon(Icons.star, color: Colors.amber, size: 20),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    '${movie.voteAverage}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.arrow_forward_ios, size: 16, color: Color.fromARGB(255, 158, 158, 158)),
+                      ],
+                    ),
+                  ),
+                ),
               );
             },
           );
