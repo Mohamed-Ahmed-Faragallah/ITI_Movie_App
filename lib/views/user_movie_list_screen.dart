@@ -66,7 +66,6 @@ class _UserMovieListScreenState extends State<UserMovieListScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            // بوستر الفيلم بحجم كبير
                             posterPathVal.isNotEmpty
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
@@ -81,7 +80,6 @@ class _UserMovieListScreenState extends State<UserMovieListScreen> {
                                   )
                                 : const SizedBox(width: 90, height: 130, child: Icon(Icons.movie, size: 50)),
                             const SizedBox(width: 15),
-                            // اسم الفيلم والتقييم بخط كبير
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +103,6 @@ class _UserMovieListScreenState extends State<UserMovieListScreen> {
                                 ],
                               ),
                             ),
-                            // زر الحذف
                             IconButton(
                               icon: const Icon(Icons.delete, color: Colors.red, size: 28),
                               onPressed: () async {
